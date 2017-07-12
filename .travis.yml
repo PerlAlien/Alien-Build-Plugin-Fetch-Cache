@@ -5,6 +5,7 @@ install:
   - perlbrew list
   - dzil authordeps --missing | cpanm -n
   - dzil listdeps   --missing | cpanm -n
+  - ./maint/travis-install-alienbuild
 
 perl:
   - "5.14"
