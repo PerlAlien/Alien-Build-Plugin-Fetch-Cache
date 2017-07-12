@@ -15,11 +15,18 @@ $modules{$_} = $_ for qw(
   ExtUtils::MakeMaker
   File::HomeDir
   File::chdir
+  Getopt::Long
+  Number::Bytes::Human
   Path::Tiny
+  Pod::Usage
   Sereal
   Test2::V0
+  Test::Alien::Build
   Test::More
+  Test::Script
   URI
+  autodie
+  bytes
 );
 
 

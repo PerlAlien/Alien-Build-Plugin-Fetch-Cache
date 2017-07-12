@@ -20,6 +20,16 @@ As mentioned, not a sophisticated cache.  Patches welcome to make it smarter.
 There are probably lots of corner cases that this plugin doesn't take into
 account, but it is probably good enough for most Alien usage.
 
+# ENVIRONMENT
+
+- ALIEN\_BUILD\_PLUGIN\_FETCH\_CACHE\_PRECACHE
+
+    If set to a true value, then this plugin will precache all files that match the appropriate pattern in the [alienfile](https://metacpan.org/pod/alienfile).
+
+    This can be helpful if you are developing a prefer plugin or filter and will be off-line for the development.
+
+    Be careful, if no pattern is specified you could end up downloading the entire internet!
+
 # SEE ALSO
 
 [Alien::Build](https://metacpan.org/pod/Alien::Build), [alienfile](https://metacpan.org/pod/alienfile), [Alien::Base](https://metacpan.org/pod/Alien::Base)
