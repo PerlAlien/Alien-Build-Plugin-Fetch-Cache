@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+0.02      2017-07-12 16:46:05 -0400
   - Added abcache command line interface
   - Fixed bug where filename for cached copy would always be 'data'
   - Internal cache directory format has changed, remove your old 
