@@ -1,5 +1,5 @@
 use File::HomeDir::Test;
-use Test2::Bundle::Extended;
+use Test2::V0;
 use Alien::Build;
 use Alien::Build::Plugin::Fetch::Cache;
 use File::chdir;

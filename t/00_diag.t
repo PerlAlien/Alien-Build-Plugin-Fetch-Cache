@@ -17,7 +17,7 @@ $modules{$_} = $_ for qw(
   File::chdir
   Path::Tiny
   Sereal
-  Test2::Suite
+  Test2::V0
   Test::More
   URI
 );
