@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Remove dependency on File::HomeDir
 
 0.02      2017-07-12 16:46:05 -0400
   - Added abcache command line interface
