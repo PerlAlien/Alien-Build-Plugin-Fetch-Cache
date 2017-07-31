@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 use autodie;
-use 5.010;
+use 5.010001;
 use Path::Tiny qw( path );
 use Pod::Usage qw( pod2usage );
 use Getopt::Long qw( GetOptions );

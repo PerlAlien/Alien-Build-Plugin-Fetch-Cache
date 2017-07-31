@@ -2,7 +2,7 @@ package Alien::Build::Plugin::Fetch::Cache;
 
 use strict;
 use warnings;
-use 5.010;
+use 5.010001;
 use Alien::Build::Plugin;
 use URI 1.71;
 use Path::Tiny 0.100 ();
