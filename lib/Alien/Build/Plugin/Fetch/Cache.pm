@@ -48,14 +48,14 @@ sub _local_file
 sub init
 {
   my($self, $meta) = @_;
-  
+
   $meta->around_hook(
     fetch => sub {
       my($orig, $build, $url) = @_;
       my $local_file;
-      
+
       my $cache_url = $url // $build->meta_prop->{plugin_download_negotiate_default_url};
-      
+
       if($cache_url && $cache_url !~ m!^/!  && $cache_url !~ m!^file:!)
       {
         my $uri = URI->new($cache_url);
@@ -67,14 +67,14 @@ sub init
         }
       }
       my $res = $orig->($build, $url);
-      
+
       if(defined $local_file)
       {
         $local_file->parent->mkpath;
         if($res->{type} eq 'file')
         {
           my $md5 = Digest::MD5->new;
-          
+
           if($res->{content})
           {
             $md5->add($res->{content});
@@ -85,7 +85,7 @@ sub init
             $md5->addfile($fh);
             close $fh;
           }
-          
+
           my $data = Path::Tiny->new(bsd_glob '~/.alienbuild/plugin_fetch_cache/payload')
                      ->child($md5->hexdigest)
                      ->child($res->{filename});
@@ -115,7 +115,7 @@ sub init
           $local_file->spew_raw( encode_sereal $res );
         }
       }
-      
+
       $res;
     }
   );
@@ -126,7 +126,7 @@ sub init
       prefer => sub {
         my($orig, $build, @rest) = @_;
         my $ret = $orig->($build, @rest);
-      
+
         if($ret->{type} eq 'list')
         {
           foreach my $file (@{ $ret->{list} })

@@ -94,7 +94,7 @@ if($opt_list)
 {
   recurse(sub {
     my($uri, $meta, $metafile) = @_;
-    
+
     my $size = 0;
     my $age  = 0;
     if($meta->{path})
@@ -107,7 +107,7 @@ if($opt_list)
       $size = do { use bytes; length $meta->{content} };
       $age  = -A $metafile;
     }
-    
+
     printf "%5s %5s %s\n", format_bytes($size), int($age), $uri;
   });
 }
@@ -125,16 +125,16 @@ elsif($opt_clear)
     my($uri, $meta, $metafile) = @_;
 
     my $dir = $metafile->parent;
-    
+
     if($meta->{path})
     {
       $rm->($meta->{path});
     }
-    
+
     $rm->($metafile);
-    
+
     $rmdir->($dir);
-    
+
   });
 }
 else

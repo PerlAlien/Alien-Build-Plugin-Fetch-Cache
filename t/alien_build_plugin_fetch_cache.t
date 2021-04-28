@@ -8,7 +8,7 @@ use Path::Tiny qw( path );
 use Capture::Tiny qw( capture_merged );
 
 subtest 'basic' => sub {
-  
+
   local $CWD = tempdir( CLEANUP => 1);
 
   $ENV{ALIEN_BUILD_PRELOAD} = 'Fetch::Cache';
@@ -17,18 +17,18 @@ subtest 'basic' => sub {
     use alienfile;
     use File::Temp qw( tempdir );
     use Path::Tiny qw( path );
-    
+
     my $file2 = path(tempdir( CLEANUP => 1))->child('file2.txt');
     $file2->spew('content of file2');
 
     probe sub { 'share' };
-    
+
     share {
-    
+
       fetch sub {
         my($build, $url) = @_;
         $main::count++;
-        
+
         if($url eq 'http://foo.test/file1.txt')
         {
           return {
@@ -37,7 +37,7 @@ subtest 'basic' => sub {
             content  => 'content of file1',
           };
         }
-        
+
         elsif($url eq 'http://foo.test/file2.txt')
         {
           return {
@@ -46,7 +46,7 @@ subtest 'basic' => sub {
             path     => $file2->stringify,
           };
         }
-        
+
         elsif($url eq 'http://foo.test/')
         {
           return {
@@ -57,17 +57,17 @@ subtest 'basic' => sub {
             ],
           };
         }
-        
+
         else
         {
           die;
         }
       };
-    
+
     };
   };
-  
-  my $fetch = sub 
+
+  my $fetch = sub
   {
     my($url) = @_;
     my($output, $res) = capture_merged {
@@ -92,7 +92,7 @@ subtest 'basic' => sub {
       },
       'expected index',
     );
-    
+
     is($main::count, 1, 'not cached' );
 
   };
@@ -112,7 +112,7 @@ subtest 'basic' => sub {
       },
       'expected index',
     );
-    
+
     is($main::count, 0, 'cached' );
 
   };
@@ -121,7 +121,7 @@ subtest 'basic' => sub {
 
     $main::count = 0;
     local $build->meta_prop->{plugin_download_negotiate_default_url} = 'http://foo.test/';
-    
+
     my $res = $fetch->();
     is(
       $res,
@@ -133,11 +133,11 @@ subtest 'basic' => sub {
       },
       'expected index',
     );
-    
+
     is($main::count, 0, 'cached' );
 
   };
-  
+
   subtest 'first file1' => sub {
 
     $main::count = 0;
@@ -229,7 +229,7 @@ subtest 'basic' => sub {
       'not cached'
     );
   };
-  
+
 };
 
 done_testing;
