@@ -1,10 +1,12 @@
-# Alien::Build::Plugin::Fetch::Cache [![Build Status](https://secure.travis-ci.org/plicease/Alien-Build-Plugin-Fetch-Cache.png)](http://travis-ci.org/plicease/Alien-Build-Plugin-Fetch-Cache)
+# Alien::Build::Plugin::Fetch::Cache [![Build Status](https://travis-ci.org/PerlAlien/Alien-Build-Plugin-Fetch-Cache.svg?branch=main)](https://travis-ci.org/PerlAlien/Alien-Build-Plugin-Fetch-Cache) ![linux](https://github.com/PerlAlien/Alien-Build-Plugin-Fetch-Cache/workflows/linux/badge.svg) ![macos](https://github.com/PerlAlien/Alien-Build-Plugin-Fetch-Cache/workflows/macos/badge.svg) ![windows](https://github.com/PerlAlien/Alien-Build-Plugin-Fetch-Cache/workflows/windows/badge.svg) ![cygwin](https://github.com/PerlAlien/Alien-Build-Plugin-Fetch-Cache/workflows/cygwin/badge.svg) ![msys2-mingw](https://github.com/PerlAlien/Alien-Build-Plugin-Fetch-Cache/workflows/msys2-mingw/badge.svg)
 
 Alien::Build plugin to cache files downloaded from the internet
 
 # SYNOPSIS
 
-    export ALIEN_BUILD_PRELOAD=Fetch::Cache
+```
+export ALIEN_BUILD_PRELOAD=Fetch::Cache
+```
 
 # DESCRIPTION
 
