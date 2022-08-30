@@ -54,7 +54,7 @@ sub init
       my($orig, $build, $url) = @_;
       my $local_file;
 
-      my $cache_url = $url // $build->meta_prop->{plugin_download_negotiate_default_url};
+      my $cache_url = $url // $build->meta_prop->{start_url};
 
       if($cache_url && $cache_url !~ m!^/!  && $cache_url !~ m!^file:!)
       {
@@ -95,6 +95,7 @@ sub init
             type     => 'file',
             filename => $res->{filename},
             path     => $data->stringify,
+            protocol => $res->{protocol},
           };
           if($res->{content})
           {

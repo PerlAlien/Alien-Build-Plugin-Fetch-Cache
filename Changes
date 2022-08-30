@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Compatability with ALIEN_DOWNLOAD_RULE overrides (gh#4)
 
 0.04      2017-07-31 15:13:02 -0400
   - Require Perl 5.10.1

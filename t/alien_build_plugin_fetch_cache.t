@@ -29,38 +29,43 @@ subtest 'basic' => sub {
         my($build, $url) = @_;
         $main::count++;
 
-        if($url eq 'http://foo.test/file1.txt')
+        $url //= $build->meta_prop->{start_url};
+
+        if($url eq 'https://foo.test/file1.txt')
         {
           return {
             type     => 'file',
             filename => 'file1.txt',
             content  => 'content of file1',
+            protocol => 'https',
           };
         }
 
-        elsif($url eq 'http://foo.test/file2.txt')
+        elsif($url eq 'https://foo.test/file2.txt')
         {
           return {
             type     => 'file',
             filename => 'file2.txt',
             path     => $file2->stringify,
+            protocol => 'https',
           };
         }
 
-        elsif($url eq 'http://foo.test/')
+        elsif($url eq 'https://foo.test/')
         {
           return {
-            type => 'list',
-            list => [
-              { filename => 'file1.txt', url => 'http://foo.test/file1.txt' },
-              { filename => 'file2.txt', url => 'http://foo.test/file2.txt' },
+            type     => 'list',
+            protocol => 'https',
+            list     => [
+              { filename => 'file1.txt', url => 'https://foo.test/file1.txt' },
+              { filename => 'file2.txt', url => 'https://foo.test/file2.txt' },
             ],
           };
         }
 
         else
         {
-          die;
+          die "url = $url";
         }
       };
 
@@ -81,13 +86,14 @@ subtest 'basic' => sub {
 
     $main::count = 0;
 
-    my $res = $fetch->('http://foo.test/');
+    my $res = $fetch->('https://foo.test/');
     is(
       $res,
       { type => 'list',
+        protocol => 'https',
         list => [
-          { filename => 'file1.txt', url => 'http://foo.test/file1.txt' },
-          { filename => 'file2.txt', url => 'http://foo.test/file2.txt' },
+          { filename => 'file1.txt', url => 'https://foo.test/file1.txt' },
+          { filename => 'file2.txt', url => 'https://foo.test/file2.txt' },
         ],
       },
       'expected index',
@@ -101,13 +107,14 @@ subtest 'basic' => sub {
 
     $main::count = 0;
 
-    my $res = $fetch->('http://foo.test/');
+    my $res = $fetch->('https://foo.test/');
     is(
       $res,
       { type => 'list',
+        protocol => 'https',
         list => [
-          { filename => 'file1.txt', url => 'http://foo.test/file1.txt' },
-          { filename => 'file2.txt', url => 'http://foo.test/file2.txt' },
+          { filename => 'file1.txt', url => 'https://foo.test/file1.txt' },
+          { filename => 'file2.txt', url => 'https://foo.test/file2.txt' },
         ],
       },
       'expected index',
@@ -120,15 +127,16 @@ subtest 'basic' => sub {
   subtest 'second index inferred URL' => sub {
 
     $main::count = 0;
-    local $build->meta_prop->{plugin_download_negotiate_default_url} = 'http://foo.test/';
+    local $build->meta_prop->{start_url} = 'https://foo.test/';
 
     my $res = $fetch->();
     is(
       $res,
       { type => 'list',
+        protocol => 'https',
         list => [
-          { filename => 'file1.txt', url => 'http://foo.test/file1.txt' },
-          { filename => 'file2.txt', url => 'http://foo.test/file2.txt' },
+          { filename => 'file1.txt', url => 'https://foo.test/file1.txt' },
+          { filename => 'file2.txt', url => 'https://foo.test/file2.txt' },
         ],
       },
       'expected index',
@@ -142,13 +150,14 @@ subtest 'basic' => sub {
 
     $main::count = 0;
 
-    my $res = $fetch->('http://foo.test/file1.txt');
+    my $res = $fetch->('https://foo.test/file1.txt');
     is(
       $res,
       hash {
         field type     => 'file';
         field filename => 'file1.txt';
         field content  => 'content of file1';
+        field protocol => 'https';
       },
       'expected file',
     );
@@ -163,13 +172,15 @@ subtest 'basic' => sub {
 
     $main::count = 0;
 
-    my $res = $fetch->('http://foo.test/file1.txt');
+    my $res = $fetch->('https://foo.test/file1.txt');
     is(
       $res,
       hash {
         field type     => 'file';
         field filename => 'file1.txt';
         field path     => T();
+        field protocol => 'https';
+        end;
       },
       'expected file',
     );
@@ -188,13 +199,14 @@ subtest 'basic' => sub {
 
     $main::count = 0;
 
-    my $res = $fetch->('http://foo.test/file2.txt');
+    my $res = $fetch->('https://foo.test/file2.txt');
     is(
       $res,
       hash {
         field type     => 'file';
         field filename => 'file2.txt';
         field path     => T();
+        field protocol => 'https';
       },
       'expected file',
     );
@@ -209,13 +221,15 @@ subtest 'basic' => sub {
 
     $main::count = 0;
 
-    my $res = $fetch->('http://foo.test/file2.txt');
+    my $res = $fetch->('https://foo.test/file2.txt');
     is(
       $res,
       hash {
         field type     => 'file';
         field filename => 'file2.txt';
         field path     => T();
+        field protocol => 'https';
+        end;
       },
       'expected file',
     );
